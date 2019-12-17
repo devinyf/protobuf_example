@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package greet;
+
+option go_package = "greetpb";
+
+message Greeting {
+    string first_name = 1;
+    string last_name = 2;
+}
+
+// 包含 Greeting
+message GreetRequest {
+    Greeting greeting = 1;
+}
+
+message GreetResponse {
+    string result = 1;
+}
+
+// message GreetManytimesRequest {
+//     Greeting greeting = 1;
+// }
+
+// message GreetManytimesResponse {
+//     string result = 1;
+// }
+
+// message LongGreetRequest {
+//     Greeting greeting = 1;
+// }
+
+// message LongGreetResponse {
+//     string result = 1;
+// }
+
+// message GreetEveryRequest {
+//     Greeting Greeting = 1;
+// }
+
+// message GreetEveryResponse {
+//     string result = 1;
+// }
+
+// service 会在go中转译为 GreetServiceService / GreetServiceClient 两个interface
+service GreetService{
+    //Unary
+    rpc Greet (GreetRequest) returns (GreetResponse) {};
+
+    // // server stream
+    // rpc GreetManytimes (GreetManytimesRequest) returns (stream GreetManytimesResponse) {};
+
+    // //client stream
+    // rpc LongGreet (stream LongGreetRequest) returns (LongGreetResponse) {};
+
+    // // Bi-Directional Streaming
+    // rpc GreetEvery (stream GreetEveryRequest) returns (stream GreetEveryResponse);
+}
